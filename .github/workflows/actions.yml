@@ -1,0 +1,32 @@
+name: FileBot Sort
+
+on:
+  schedule:
+    - cron: 0 23 * * *
+  workflow_dispatch:
+    inputs:
+    
+jobs:
+  Sort:
+    runs-on: ubuntu-latest
+    name: Sort Files
+    continue-on-error: true
+    timeout-minutes: 200
+
+    steps:
+      - uses: actions/checkout@v2
+      - name: Filebot Install
+        run: |
+          cd ~/
+          curl https://rclone.org/install.sh | sudo bash
+          mkdir -p ~/filebot
+          wget https://github.com/crypt-bphc/filebot/raw/main/filebot.jar
+          mkdir -p ~/.config/rclone
+          cat >  ~/.config/rclone/rclone.conf  << EOF
+          ${{ secrets.RCLONE_CONFIG }}
+          EOF
+          sudo mkdir -p /root/.config/rclone
+          sudo cp ~/.config/rclone/rclone.conf /root/.config/rclone/
+          mkdir -p ~/mount
+          sudo rclone mount Media:/ ~/mount/ --allow-other --allow-non-empty --cache-db-purge --buffer-size 32M --use-mmap --dir-cache-time 4h --drive-chunk-size 16M --timeout 1h --vfs-cache-mode minimal --vfs-read-chunk-size 128M --vfs-read-chunk-size-limit 1G --fast-list
+          ls ~/mount
