@@ -29,4 +29,4 @@ jobs:
           mkdir -p ~/mount
           sudo rclone mount Media:/ ~/mount/ --allow-other --daemon --cache-db-purge --buffer-size 32M --use-mmap --dir-cache-time 4h --drive-chunk-size 16M --timeout 1h --vfs-cache-mode minimal --vfs-read-chunk-size 128M --vfs-read-chunk-size-limit 1G --fast-list
           sleep 3
-          sudo java -jar filebot.jar -script fn:amc --output "~/mount/MediaServer" --action move -non-strict "~/mount/Downloads" --log-file amc.log --def clean=y --def unsorted=y --def movieFormat="~/mount/MediaServer/{plex.dir}/{fn}" seriesFormat="~/mount/MediaServer/{plex.dir}/{fn}" animeFormat="~/mount/MediaServer/{plex.dir}/{fn}" musicFormat="~/mount/MediaServer/{plex.dir}/{fn}" --def minFileSize=0
+          sudo java -jar filebot.jar -script fn:amc --output "mount/MediaServer" --action move -non-strict "mount/Downloads" --log-file amc.log --def clean=y --def unsorted=y --def movieFormat="mount/MediaServer/{plex.dir}/{fn}" seriesFormat="mount/MediaServer/{plex.dir}/{fn}" animeFormat="mount/MediaServer/{plex.dir}/{fn}" musicFormat="mount/MediaServer/{plex.dir}/{fn}" --def minFileSize=0
