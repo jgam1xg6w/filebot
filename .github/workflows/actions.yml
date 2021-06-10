@@ -28,5 +28,5 @@ jobs:
           sudo mkdir -p /root/.config/rclone
           sudo cp ~/.config/rclone/rclone.conf /root/.config/rclone/
           mkdir -p ~/mount
-          sudo rclone mount Media:/ ~/mount/ --allow-other --cache-db-purge --buffer-size 32M --use-mmap --dir-cache-time 4h --drive-chunk-size 16M --timeout 1h --vfs-cache-mode minimal --vfs-read-chunk-size 128M --vfs-read-chunk-size-limit 1G --fast-list
+          sudo rclone mount Media:/ ~/mount/ --allow-other --daemon --cache-db-purge --buffer-size 32M --use-mmap --dir-cache-time 4h --drive-chunk-size 16M --timeout 1h --vfs-cache-mode minimal --vfs-read-chunk-size 128M --vfs-read-chunk-size-limit 1G --fast-list
           ls ~/mount
